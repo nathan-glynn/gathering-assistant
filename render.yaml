@@ -3,6 +3,7 @@ services:
     name: gathering-assistant
     env: node
     buildCommand: |
+      npm install
       pip install -r requirements.txt
     startCommand: npm start
     envVars:

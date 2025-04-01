@@ -1,16 +1,11 @@
 {
   "name": "gathering-assistant",
   "version": "1.0.0",
-  "description": "Flask app wrapped with Node.js for proper port binding",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "fallback": "node express-server.js"
+    "start": "node server.js"
   },
   "engines": {
     "node": "18.x"
-  },
-  "dependencies": {
-    "express": "^4.18.2"
   }
 } 
