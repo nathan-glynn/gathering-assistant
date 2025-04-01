@@ -3,13 +3,11 @@ services:
     name: gathering-assistant
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: cd src && gunicorn app:app
+    startCommand: gunicorn wsgi:app --bind 0.0.0.0:${PORT:-10000}
     envVars:
       - key: FLASK_ENV
         value: production
       - key: FLASK_DEBUG
         value: 0
       - key: PERPLEXITY_API_KEY
-        sync: false
-      - key: PORT
-        value: 10000 
+        sync: false 

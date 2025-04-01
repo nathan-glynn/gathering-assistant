@@ -1,1 +1,1 @@
-web: cd src && gunicorn app:app 
+web: gunicorn wsgi:app --bind 0.0.0.0:${PORT:-5000} 

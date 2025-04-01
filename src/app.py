@@ -41,6 +41,10 @@ limiter = Limiter(
 def index():
     return render_template('index.html')
 
+@app.route('/health')
+def health():
+    return jsonify({"status": "healthy", "port": os.getenv('PORT', 'not_set')})
+
 @app.route('/get_specs', methods=['POST'])
 @limiter.limit("10 per minute")
 async def get_specs():
