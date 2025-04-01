@@ -3,7 +3,7 @@ services:
     name: gathering-assistant
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app
+    startCommand: cd src && gunicorn app:app
     envVars:
       - key: FLASK_ENV
         value: production
