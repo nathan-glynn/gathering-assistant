@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: gathering-assistant
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: FLASK_DEBUG
+        value: 0
+      - key: PERPLEXITY_API_KEY
+        sync: false
+      - key: PORT
+        value: 10000 
