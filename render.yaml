@@ -1,9 +1,21 @@
 services:
   - type: web
-    name: gathering-assistant
-    env: node
-    buildCommand: npm install
-    startCommand: npm start
+    name: spec-gathering-tool
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT
     envVars:
       - key: PERPLEXITY_API_KEY
-        sync: false 
+        sync: false
+      - key: FLASK_ENV
+        value: production
+      - key: FLASK_DEBUG
+        value: "0"
+      - key: RATE_LIMIT_ENABLED
+        value: "true"
+      - key: RATE_LIMIT_REQUESTS
+        value: "100"
+      - key: RATE_LIMIT_PERIOD
+        value: "3600"
+      - key: ENABLE_PROMETHEUS
+        value: "false" 
