@@ -5,7 +5,7 @@ import logging
 import os
 from dotenv import load_dotenv
 from pathlib import Path
-from search_utils import search_specification
+from src.search_utils import search_specification
 import time
 import json
 import asyncio
