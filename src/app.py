@@ -87,6 +87,6 @@ async def get_specs():
         logger.error(f"Error in get_specs: {error_msg}")
         return jsonify({"error": error_msg}), 500
 
-if __name__ == '__main__':
-    port = int(os.getenv('PORT', 5001))
-    app.run(host='0.0.0.0', port=port, debug=os.getenv('FLASK_DEBUG', 'False').lower() == 'true') 
+# if __name__ == '__main__':
+#     port = int(os.getenv('PORT', 5001))
+#     app.run(host='0.0.0.0', port=port, debug=os.getenv('FLASK_DEBUG', 'False').lower() == 'true') 
