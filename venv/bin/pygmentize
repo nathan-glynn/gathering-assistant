@@ -1,4 +1,4 @@
-#!/Users/tylerkobil/Desktop/code/github/gathering-assistant/venv/bin/python3
+#!/Users/nathanglynn/Documents/GitHub/gathering-assistant/venv/bin/python3.11
 # -*- coding: utf-8 -*-
 import re
 import sys
