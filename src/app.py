@@ -1,5 +1,5 @@
 #Accept these updates
-from flask.app import AsyncFlask as Flask
+from flask.app import Flask
 from flask import request, jsonify, render_template
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
