@@ -11,6 +11,18 @@ import certifi
 import requests
 from concurrent.futures import ThreadPoolExecutor
 
+# Debugging feature
+import time
+import psutil
+
+start_ts = time.perf_counter()  # used to track elapsed time
+
+def log_stage(stage: str):
+    process = psutil.Process(os.getpid())
+    mem = process.memory_info().rss / 1024 / 1024
+    now = time.perf_counter()
+    logger.info(f"[{stage}] Time elapsed: {now - start_ts:.2f}s | Memory: {mem:.2f} MB")
+
 # Load environment variables
 root_dir = Path(__file__).resolve().parent.parent
 env_path = root_dir / '.env'
@@ -25,9 +37,6 @@ PERPLEXITY_API_KEY = os.getenv('PERPLEXITY_API_KEY')
 PERPLEXITY_API_URL = "https://api.perplexity.ai/chat/completions"
 
 async def get_specification_async(supplier: str, part_number: str, specifications: List[str]) -> Dict:
-    """
-    Make a single Perplexity API call for specifications.
-    """
     try:
         specs_list = "\n".join([f"- {spec}" for spec in specifications])
         prompt = f"""Please gather the following specifications for {supplier} part number {part_number}:
@@ -51,7 +60,7 @@ Please be thorough but concise in your response. Only provide information for th
                 "Authorization": f"Bearer {PERPLEXITY_API_KEY}",
                 "Content-Type": "application/json"
             }
-            
+
             payload = {
                 "model": "sonar-pro",
                 "messages": [
@@ -59,8 +68,8 @@ Please be thorough but concise in your response. Only provide information for th
                     {"role": "user", "content": prompt}
                 ]
             }
-            
-            logger.info(f"Making API request to Perplexity")
+
+            logger.info("Making API request to Perplexity")
             response = await asyncio.to_thread(
                 requests.post,
                 PERPLEXITY_API_URL,
@@ -68,16 +77,16 @@ Please be thorough but concise in your response. Only provide information for th
                 json=payload,
                 timeout=30
             )
-            
+
             if response.status_code != 200:
                 logger.error(f"Perplexity API error: Status {response.status_code}, Response: {response.text}")
                 logger.error(f"Request headers: {headers}")
                 raise Exception(f"API request failed with status {response.status_code}: {response.text}")
-            
+
             result = response.json()
             logger.info(f"Perplexity API raw response: {json.dumps(result, indent=2)}")
             logger.info("Perplexity API call successful")
-            
+
             if 'choices' not in result or not result['choices']:
                 logger.error("No choices in response")
                 return None
@@ -87,9 +96,9 @@ Please be thorough but concise in your response. Only provide information for th
             if 'content' not in result['choices'][0]['message']:
                 logger.error("No content in message")
                 return None
-            
+
             return result['choices'][0]['message']['content']
-                    
+
         except Exception as api_error:
             logger.error(f"Perplexity API error: {str(api_error)}")
             raise
@@ -98,14 +107,11 @@ Please be thorough but concise in your response. Only provide information for th
         return None
 
 def process_response(raw_response: str, specifications: List[str]) -> Dict[str, Any]:
-    """
-    Process a single response into structured format.
-    """
     logger.info(f"Processing raw response: {raw_response}")
     sections = [s.strip() for s in raw_response.split('\n\n') if s.strip()]
     logger.info(f"Found {len(sections)} sections")
     processed_specs = {}
-    
+
     for spec in specifications:
         logger.info(f"Processing specification: {spec}")
         for section in sections:
@@ -116,7 +122,7 @@ def process_response(raw_response: str, specifications: List[str]) -> Dict[str, 
                 source_url = ""
                 source_notes = ""
                 reasoning = ""
-                
+
                 for line in lines:
                     line = line.strip()
                     if line.lower().startswith('value:'):
@@ -131,7 +137,7 @@ def process_response(raw_response: str, specifications: List[str]) -> Dict[str, 
                             reasoning = conf_text.split(',', 1)[1].strip()
                             source_notes = reasoning
                             logger.info(f"Found confidence reasoning: {reasoning}")
-                
+
                 if spec not in processed_specs:
                     processed_specs[spec] = []
                 if value != "-":
@@ -142,14 +148,11 @@ def process_response(raw_response: str, specifications: List[str]) -> Dict[str, 
                     })
                     logger.info(f"Added specification result for {spec}")
                 break
-    
+
     logger.info(f"Final processed specs: {json.dumps(processed_specs, indent=2)}")
     return processed_specs
 
 def calculate_confidence(spec_results: List[Dict]) -> Dict:
-    """
-    Calculate confidence based on multiple results for the same specification.
-    """
     if not spec_results:
         return {
             "value": "-",
@@ -158,8 +161,7 @@ def calculate_confidence(spec_results: List[Dict]) -> Dict:
             "source": {"url": "", "title": "", "confidence_notes": "No results found"},
             "reasoning": "No results found"
         }
-    
-    # Count occurrences of each value
+
     value_counts = {}
     for result in spec_results:
         value = result["value"]
@@ -173,28 +175,24 @@ def calculate_confidence(spec_results: List[Dict]) -> Dict:
                 "sources": [result["source"]],
                 "reasoning": [result["reasoning"]]
             }
-    
-    # Find the most common value
+
     most_common = max(value_counts.items(), key=lambda x: x[1]["count"])
     value, details = most_common
-    
-    # Calculate confidence
     confidence = details["count"] / len(spec_results)
-    
-    # Determine validation status
-    if confidence == 1.0:  # 3/3 matches
+
+    if confidence == 1.0:
         validation_status = "green"
-    elif confidence >= 0.66:  # 2/3 matches
+    elif confidence >= 0.66:
         validation_status = "yellow"
-    else:  # 1/3 or less matches
+    else:
         validation_status = "red"
-    
+
     return {
         "value": value,
         "confidence": confidence,
         "validation_status": validation_status,
         "source": {
-            "url": details["sources"][0],  # Use the first source
+            "url": details["sources"][0],
             "title": "Multiple Sources" if len(details["sources"]) > 1 else "Source",
             "confidence_notes": f"{int(confidence * 100)}% confidence based on {details['count']}/{len(spec_results)} matching results"
         },
@@ -202,29 +200,33 @@ def calculate_confidence(spec_results: List[Dict]) -> Dict:
     }
 
 async def search_specification(supplier: str, part_numbers: List[str], specifications: List[str]) -> Dict[str, Any]:
-    """
-    Make three parallel queries to Perplexity for each product specification and combine results.
-    Returns results for multiple part numbers.
-    """
     try:
+        log_stage("search_specification_start")
         all_results = []
-        
-        # Process each part number
+
         for part_number in part_numbers:
-            # Make three parallel queries for this part number
+            log_stage(f"start_part:{part_number}")
+
             tasks = [
-                get_specification_async(supplier, part_number, specifications)
+                asyncio.wait_for(get_specification_async(supplier, part_number, specifications), timeout=20)
                 for _ in range(3)
             ]
-            
-            responses = await asyncio.gather(*tasks)
+            log_stage(f"launched_tasks:{part_number}")
+
+            try:
+                responses = await asyncio.gather(*tasks, return_exceptions=True)
+            except Exception as gather_error:
+                logger.error(f"Gather failed for {part_number}: {gather_error}")
+                continue
+
+            log_stage(f"received_responses:{part_number}")
             responses = [r for r in responses if r is not None]
-            
+
             if not responses:
                 logger.warning(f"No valid responses received from Perplexity for part number {part_number}")
+                log_stage(f"no_responses:{part_number}")
                 continue
-            
-            # Process each response for this part number
+
             processed_results = {}
             for response in responses:
                 result = process_response(response, specifications)
@@ -232,8 +234,9 @@ async def search_specification(supplier: str, part_numbers: List[str], specifica
                     if spec not in processed_results:
                         processed_results[spec] = []
                     processed_results[spec].extend(values)
-            
-            # Calculate confidence and combine results for this part number
+
+            log_stage(f"starting_confidence:{part_number}")
+
             final_results = []
             for spec in specifications:
                 spec_results = processed_results.get(spec, [])
@@ -242,20 +245,19 @@ async def search_specification(supplier: str, part_numbers: List[str], specifica
                     "name": spec,
                     **confidence_result
                 })
-            
-            # Add results for this part number to the overall results
+
             all_results.append({
                 "part_number": part_number,
                 "specifications": final_results
             })
-        
+
+        log_stage("search_specification_end")
+
         if not all_results:
             raise Exception("No valid results obtained for any part numbers")
-        
-        return {
-            "results": all_results
-        }
-    
+
+        return {"results": all_results}
+
     except Exception as e:
         logger.error(f"Error in search_specification: {str(e)}")
         return {"error": str(e)}
