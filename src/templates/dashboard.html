@@ -43,6 +43,11 @@
             margin-bottom: 20px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
+
+        .missing-spec {
+            color: #888;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
@@ -74,7 +79,13 @@
                         {% for result in search_results %}
                         <tr>
                             <td>{{ result.specification }}</td>
-                            <td>{{ result.value }}</td>
+                            <td>
+                                {% if result.value in ['', '-', '"-"', None] %}
+                                    <span class="missing-spec">-</span>
+                                {% else %}
+                                    {{ result.value }}
+                                {% endif %}
+                            </td>
                             <td>{{ result.source }}</td>
                             <td>{{ "%.1f"|format(result.confidence * 100) }}%</td>
                             <td>{{ "%.1f"|format(result.time_ms) }}</td>
@@ -86,4 +97,4 @@
         </div>
     </div>
 </body>
-</html> 
+</html>
