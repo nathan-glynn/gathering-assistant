@@ -345,7 +345,7 @@ def extract_specs_with_llm(ocr_text, part_numbers, specifications, api_key):
         """
     )
     # Call Mistral's chat/completion endpoint
-    response = client.chat(
+    response = client.chat.create(
         model="mistral-large-latest",
         messages=[{"role": "user", "content": prompt}]
     )
