@@ -8,7 +8,7 @@ import os
 from dotenv import load_dotenv
 from pathlib import Path
 from src.search_utils import search_specification
-from src.pdf_utils import process_pdf_for_specifications
+from src.pdf_utils import process_pdf_for_specifications, process_pdf_with_mistral
 import time
 import json
 import asyncio
@@ -99,30 +99,21 @@ async def get_specs():
 async def process_pdf():
     try:
         start_time = time.time()
-        
         logger.info("Received request to process PDF")
-        
-        # Check if PDF file is included
         if 'pdf_file' not in request.files:
             logger.error("No PDF file provided")
             return jsonify({"error": "No PDF file provided"}), 400
-            
         pdf_file = request.files['pdf_file']
         if pdf_file.filename == '':
             logger.error("Empty filename")
             return jsonify({"error": "No PDF file selected"}), 400
-            
         if not pdf_file.filename.endswith('.pdf'):
             logger.error(f"Invalid file type: {pdf_file.filename}")
             return jsonify({"error": "File must be a PDF"}), 400
-        
-        # Get other form data
         supplier = request.form.get('supplier', '')
         part_numbers = json.loads(request.form.get('part_numbers', '[]'))
         specifications = json.loads(request.form.get('specifications', '[]'))
-        
         logger.info(f"Processing PDF for supplier: {supplier}, parts: {part_numbers}, specs: {specifications}")
-        
         if not all([supplier, part_numbers, specifications]):
             missing_fields = []
             if not supplier: missing_fields.append("supplier")
@@ -131,20 +122,15 @@ async def process_pdf():
             error_msg = f"Missing required fields: {', '.join(missing_fields)}"
             logger.error(error_msg)
             return jsonify({"error": error_msg}), 400
-        
-        # Read the PDF file
         pdf_bytes = pdf_file.read()
         logger.info(f"PDF file size: {len(pdf_bytes)} bytes")
-        
-        # Process the PDF
         try:
-            result = await process_pdf_for_specifications(pdf_bytes, supplier, part_numbers, specifications)
-            logger.info("Successfully processed PDF and extracted specifications")
+            result = process_pdf_with_mistral(pdf_bytes, supplier, part_numbers, specifications)
+            logger.info("Successfully processed PDF and extracted specifications with Mistral")
             return jsonify(result)
         except Exception as pdf_error:
-            logger.error(f"Error in process_pdf_for_specifications: {str(pdf_error)}")
+            logger.error(f"Error in process_pdf_with_mistral: {str(pdf_error)}")
             raise
-            
     except Exception as e:
         error_msg = str(e)
         logger.error(f"Error in process_pdf: {error_msg}")

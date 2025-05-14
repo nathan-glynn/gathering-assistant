@@ -9,6 +9,7 @@ import asyncio
 import base64
 import requests
 from functools import lru_cache
+from mistralai import Mistral
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -299,4 +300,31 @@ def get_validation_status(confidence: float) -> str:
     elif confidence > 0:
         return "red"
     else:
-        return "grey" 
+        return "grey"
+
+def process_pdf_with_mistral(pdf_bytes, supplier, part_numbers, specifications):
+    api_key = os.environ["MISTRAL_API_KEY"]
+    client = Mistral(api_key=api_key)
+
+    # Save the PDF temporarily
+    temp_path = "temp_upload.pdf"
+    with open(temp_path, "wb") as f:
+        f.write(pdf_bytes)
+
+    with open(temp_path, "rb") as f:
+        ocr_response = client.ocr.process(
+            model="mistral-ocr-latest",
+            document={
+                "type": "document_file",
+                "document_file": f
+            },
+            include_image_base64=False
+        )
+
+    os.remove(temp_path)
+
+    # Extract text from OCR response (adjust as needed)
+    extracted_text = ocr_response.get("text", "")
+    # You can now parse extracted_text for your specifications
+    # For now, just return the raw OCR response
+    return {"ocr_text": extracted_text, "ocr_response": ocr_response} 
