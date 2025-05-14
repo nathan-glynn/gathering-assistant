@@ -351,6 +351,7 @@ def process_pdf_with_mistral(pdf_bytes, supplier, part_numbers, specifications):
 
     # Parse OCR for structured results
     parsed = parse_ocr_for_specifications(ocr_response, part_numbers, specifications)
-    # Optionally, include raw OCR for debugging
-    parsed["ocr_debug"] = getattr(ocr_response, 'pages', [])
+    # Make ocr_debug serializable
+    pages = getattr(ocr_response, 'pages', [])
+    parsed["ocr_debug"] = [p.model_dump() if hasattr(p, 'model_dump') else str(p) for p in pages]
     return parsed 
