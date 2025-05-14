@@ -304,20 +304,18 @@ def get_validation_status(confidence: float) -> str:
 
 def parse_ocr_for_specifications(ocr_response, part_numbers, specifications):
     # Combine all markdown text from all pages
-    all_text = "\n".join(page.markdown for page in getattr(ocr_response, 'pages', []))
+    all_text = "\n".join(page["markdown"] if isinstance(page, dict) else page.markdown for page in getattr(ocr_response, 'pages', []))
     results = []
     for part_number in part_numbers:
         part_result = {"part_number": part_number, "specifications": []}
         for spec in specifications:
-            # Simple regex: look for the spec name and grab the value after it (up to a newline or punctuation)
-            pattern = rf"{re.escape(spec)}[\s:]*([\w\d\"'\.\-\(\)\/]+)"
+            # Look for lines like "Spec Name: Value" or "Spec Name - Value"
+            pattern = rf"{re.escape(spec)}\s*[:\-]\s*([^\n]+)"
             match = re.search(pattern, all_text, re.IGNORECASE)
-            value = match.group(1) if match else "Not found"
-            confidence = "medium" if match else "low"
+            value = match.group(1).strip() if match else "Not found"
             part_result["specifications"].append({
                 "name": spec,
                 "value": value,
-                "confidence": confidence,
                 "source": "OCR"
             })
         results.append(part_result)
