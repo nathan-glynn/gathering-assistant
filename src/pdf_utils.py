@@ -336,5 +336,10 @@ def process_pdf_with_mistral(pdf_bytes, supplier, part_numbers, specifications):
     os.remove(temp_path)
 
     # Extract text from OCR response (adjust as needed)
-    extracted_text = ocr_response.get("text", "")
-    return {"ocr_text": extracted_text, "ocr_response": ocr_response} 
+    extracted_text = getattr(ocr_response, "text", "")
+    # Return a serializable version of the OCR response
+    if hasattr(ocr_response, 'model_dump'):
+        ocr_response_dict = ocr_response.model_dump()
+    else:
+        ocr_response_dict = str(ocr_response)
+    return {"ocr_text": extracted_text, "ocr_response": ocr_response_dict} 
