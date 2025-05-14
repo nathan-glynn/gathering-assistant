@@ -48,285 +48,6 @@
             background-image: url('data:image/svg+xml;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAF0WlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNy4yLWMwMDAgNzkuMWI2NWE3OWI0LCAyMDIyLzA2LzEzLTIyOjAxOjAxICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdEV2dD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlRXZlbnQjIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgMjQuMCAoTWFjaW50b3NoKSIgeG1wOkNyZWF0ZURhdGU9IjIwMjQtMDMtMDdUMTM6MDc6NDctMDU6MDAiIHhtcDpNZXRhZGF0YURhdGU9IjIwMjQtMDMtMDdUMTM6MDc6NDctMDU6MDAiIHhtcDpNb2RpZnlEYXRlPSIyMDI0LTAzLTA3VDEzOjA3OjQ3LTA1OjAwIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjA1YzM5ZjE1LTY2ZDgtNDI4NC1hMjY3LTYyZjZhZjY2ZjY2ZiIgeG1wTU06RG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjA1YzM5ZjE1LTY2ZDgtNDI4NC1hMjY3LTYyZjZhZjY2ZjY2ZiIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOjA1YzM5ZjE1LTY2ZDgtNDI4NC1hMjY3LTYyZjZhZjY2ZjY2ZiIgZGM6Zm9ybWF0PSJpbWFnZS9zdmcreG1sIiBwaG90b3Nob3A6Q29sb3JNb2RlPSIzIj4gPHhtcE1NOkhpc3Rvcnk+IDxyZGY6U2VxPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0iY3JlYXRlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDowNWMzOWYxNS02NmQ4LTQyODQtYTI2Ny02MmY2YWY2NmY2NmYiIHN0RXZ0OndoZW49IjIwMjQtMDMtMDdUMTM6MDc6NDctMDU6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCAyNC4wIChNYWNpbnRvc2gpIi8+IDwvcmRmOlNlcT4gPC94bXBNTTpIaXN0b3J5PiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PgH//v38+/r5+Pf29fTz8vHw7+7t7Ovq6ejn5uXk4+Lh4N/e3dzb2tnY19bV1NPS0dDPzs3My8rJyMfGxcTDwsHAv769vLu6ubi3trW0s7KxsK+urayrqqmop6alpKOioaCfnp2cm5qZmJeWlZSTkpGQj46NjIuKiYiHhoWEg4KBgH9+fXx7enl4d3Z1dHNycXBvbm1sa2ppaGdmZWRjYmFgX15dXFtaWVhXVlVUU1JRUE9OTUxLSklIR0ZFRENCQUA/Pj08Ozo5ODc2NTQzMjEwLy4tLCsqKSgnJiUkIyIhIB8eHRwbGhkYFxYVFBMSERAPDg0MCwoJCAcGBQQDAgEAACH5BAEAAAAALAAAAAAyADIAAAj/AAEIHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLvx9Pvrz58+jTq1/Pvr379/Djy59Pv779+/jz69/Pv7///wAGKOCABBZo4IEIJqjgggw26OCDEEYo4YQUVmjhhRhmqOGGHHbo4YcghijiiCSWaOKJKKao4oostujiizDGKOOMNNZo44045qjjjjz26OOPQAYp5JBEFmnkkUgmqeSSTDbp5JNQRinllFRWaeWVWGap5ZZcdunll2CGKeaYZJZp5plopqnmmmy26eabcMYp55x01mnnnXjmqeeefPbp55+ABirooIQWauihiCaq6KKMNuroo5BGKumklFZq6aWYZqrpppx26umnoIYq6qiklmrqqaimquqqrLbq6quwxpprr7z26uuvwAYr7LDEFmvsscgmq+yyzDbr7LPQRivttNRWa+212Gar7bbcduvtt+CGK+645JZr7rnopqvuuuy26+678MYr77z01mvvvfjmq+++/Pbr778AByzwwAQXbPDBCCes8MIMN+zwwxBHLPHEFFds8cUYZ6zxxhx37PHHIIcs8sgkl2zyySinrPLKLLfs8sswxyzzzDTXbPPNOOes88489+zzz0AHLfTQRBdt9NFIJ6300kw37fTTUEct9dRUV2311VhnrfXWXHft9ddghy322GSXbfbZaKet9tpst+3223DHLffcdNdt991456333nz37fffgAcu+OCEF2744YgnrvjijDfu+OOQRy755JRXbvnlmGeu+eacd+7556CHLvropJdu+umop6766qy37vrrsMcu++y012777bjnrvvuvPfu++/ABy/88MQXb/zxyCev/PLMN+/889BHL/301Fdv/fXYZ6/99tx37/334Icv/vjkl2/++einr/767Lfv/vvwxy///PTXb//9+Oev//789+///wAMoAAHSMACGvCACEygAhfIwAY68IEQjKAEJ0jBClrwghjMoAY3yMEOevCDIAyhCEdIwhKa8IQoTKEKV8jCFrrwhTCMoQxnSMMa2vCGOMyhDnfIwx768IdADKIQh0jEIhrxiEhMohKXyMQmOvGJUIyiFKdIxSpa8YpYzKIWt8jFLnrxi2AMoxjHSMYymvGMaEyjGtfIxja68Y1wjKMc50jHOtrxjnjMox73yMc++vGPgAykIAdJyEIa8pCITKQiF8nIRjrykZCMpCQnSclKWvKSmMykJjfJyU568pOgDKUoR0nKUprylKhMpSpXycpWuvKVsIylLGdJy1ra8pa4zKUud8nLXvryl8AMpjCHScxiGvOYyEymMpfJzGY685nQjKY0p0nNalrzmtjMpja3yc1uevOb4AynOMdJznKa85zoTKc618nOdrrznfCMpzznSc962vOe+MynPvfJz376858ADahAB0rQghr0oAhNqEIXytCGOvShEI2oRCdK0Ypa9KIYzahGN8rRjnr0oyANqUhHStKSmvSkKE2pSlfK0pa69KUwjalMZ0rTmtr0pjjNqU53ytOe+vSnQA2qUIdK1KIa9ahITapSl8rUpjr1qVCNqlSnStWqWvWqWM2qVrfK1a569atgDatYx0rWspr1rGhNq1rXyta2uvWtcI2rXOdK17ra9a54zate98rXvvr1r4ANrGAHS9jCGvawiE2sYhfL2MY69rGQjaxkJ0vZylr2spjNrGY3y9nOevazoA2taEdL2tKa9rSoTa1qV8va1rr2tbCNrWxnS9va2va2uM2tbnfL29769rfADa5wh0vc4hr3uMhNrnKXy9zmOve50I2udKdL3epa97rYza52t8vd7nr3u+ANr3jHS97ymve86E2vetfL3va6973wja9850vf+tr3vvjNr373y9/++ve/AA6wgAdM4AIb+MAITrCCF8zgBjv4wRCOsIQnTOEKW/jCGM6whjfM4Q57+MMgDrGIR0ziEpv4xChOsYpXzOIWu/jFMI6xjGdM4xrb+MY4zrGOd8zjHvv4x0AOspCHTOQiG/nISE6ykpfM5CY7+clQjrKUp0zlKlv5yljOspa3zOUue/nLYA6zmMdM5jKb+cxoTrOa18zmNrv5zXCOs5znTOc62/nOeM6znvfM5z77+c+ADrSgB03oQhv60IhOtKIXzehGO/rRkI60pCdN6Upb+tKYzrSmN83pTnv606AOtahHTepSm/rUqE61qlfN6la7+tWwjrWsZ03rWtv61rjOta53zete+/rXwA62sIdN7GIb+9jITrayl83sZjv72dCOtrSnTe1qW/va2M62trfN7W57+9vgDre4x03ucpv73OhOt7rXze52u/vd8I63vOdN73rb+974zre+983vfvv73wAPuMAHTvCCG/zgCE+4whfO8IY7/OEQj7jEJ07xilv84hjPuMY3zvGOe/zjIA+5yEdO8pKb/OQoT7nKV87ylrv85TCPucxnTvOa2/zmOM+5znfO8577/OdAD7rQh070ohv96EhPutKXzvSmO/3pUI+61KdO9apb/epYz7rWt871rnv962APu9jHTvaym/3saE+72tfO9ra7/e1wj7vc5073utv97njPu973zve++/3vgA+84AdP+MIb/vCIT7ziF8/4xjv+8ZCPvOQnT/nKW/7ymM+85jfP+c57/vOgD73oR0/60pv+9KhPvepXz/rWu/71sI+97GdP+9rb/va4z73ud8/73vv+98APvvCHT/ziG//4yE++8pfP/OY7//nQj770p0/96lv/+tjPvva3z/3ue//74A+/+MdP/vKb//zoT7/6189+97v//fCPv/znT//62//++M+//vfP//77//8AGIACOIAEWIAGeIAImIAKuIAM2IAO+IAQGIESOIEUWIEWeIEYmIEauIEc2IEe+IEgGIIiOIIkWIImeIIomIIquIIs2IIu+IIwGIMyOIM0WIM2eIM4mIM6uIM82IM++INAGIRCOIREWIRGeIRImIRKuIRM2IRO+IRQGIVSOIVUWIVWeIVYmIVauIVc2IVe+IVgGIZiOIZkWIZmeIZomIZquZZs2ZZu+ZZwGZdyOZd0WZd2eZd4mZd6uZd82Zd++ZeAGZiCOZiEWZiGeZiImZiKuZiM2ZiO+ZiQGZmSOZmUWZmWeZmYmZmauZmc2Zme+ZmgGZqiOZqkWZqmeZqomZqquZqs2Zqu+ZqwGZuyOZu0WZu2eZu4mZu6uZu82Zu++ZvAGZzCOZzEWZzGeZzImZzKuZzM2ZzO+ZzQGZ3SOZ3UWZ3WeZ3YmZ3auZ3c2Z3e+Z3gGZ7iOZ7kWZ7meZ7omZ7quZ7s2Z7u+Z7wGZ/yOZ/0WZ/2eZ/4mZ/6uZ/82Z/++Z8AGqACOqAEWqAGeqAImqAKuqAM2qAO+qAQGqESOqEUWqEWeqEYmqEauqEc2qEe+qEgGqIiOqIkWqImeqIomqIquqIs2qIu+qIwGqMyOqM0WqM2eqM4mqM6uqM82qM++qNAGqRCOqREWqRGeqRImqRKuqRM2qRO+qRQGqVSOqVUWqVWeqVYmqVauqVc2qVe+qVgGqZiOqZkWqZmeqZomqZquqZs2qZu+qZwGqdyOqd0Wqd2eqd4mqd6uqd82qd++qeAGqiCOqiEWqiGeqiImqiKuqiM2qiO+qiQGqmSOqmUWqmWeqmYmqmauqmc2qme+qmgGqqiOqqkWqqmeqqomqqquqqs2qqu+qqwGquyOqu0Wqu2equ4mqu6uqu82qu++qvAGqzCOqzEWqzGeqzImqzKuqzM2qzO+qzQGq3SOq3UWq3Weq3Ymq3auq3c2q3e+q3gGq7iOq7kWq7meq7omq7quq7s2q7u+q7wGq/yOq/0Wq/2eq/4mq/6uq/82q/++q8AG7ACO7AEW7AGe7AImwEBAQA7');
             background-size: contain;
             background-repeat: no-repeat;
-            margin: 1rem;
-        }
-
-        .header h1 {
-            margin: 0;
-            color: #333;
-            font-size: 2rem;
-        }
-        
-        .form-container {
-            background-color: var(--white);
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-top: 2rem;
-            position: relative;
-            padding-bottom: 4rem;
-        }
-        
-        .pdf-upload-container {
-            margin: 2rem 0;
-        }
-        
-        .pdf-dropzone {
-            border: 2px dashed var(--primary-blue);
-            border-radius: 12px;
-            padding: 3rem 2rem;
-            text-align: center;
-            background-color: rgba(231, 234, 234, 0.5);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .pdf-dropzone.dragover {
-            background-color: rgba(160, 217, 216, 0.2);
-            border-color: var(--primary-blue);
-            transform: scale(1.02);
-        }
-        
-        .pdf-dropzone-icon {
-            font-size: 3rem;
-            color: var(--primary-blue);
-            margin-bottom: 1rem;
-        }
-        
-        .pdf-dropzone-text {
-            color: #666;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .pdf-dropzone-subtext {
-            color: #999;
-            font-size: 0.9rem;
-        }
-        
-        .pdf-file-preview {
-            display: flex;
-            align-items: center;
-            padding: 1rem;
-            background-color: white;
-            border-radius: 8px;
-            margin-top: 1rem;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-            opacity: 0;
-            transform: translateY(10px);
-            animation: slideIn 0.3s ease forwards;
-        }
-        
-        @keyframes slideIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .pdf-file-icon {
-            color: #e74c3c;
-            font-size: 1.5rem;
-            margin-right: 1rem;
-        }
-        
-        .pdf-file-info {
-            flex-grow: 1;
-        }
-        
-        .pdf-file-name {
-            font-weight: 500;
-            color: #333;
-            margin-bottom: 0.25rem;
-        }
-        
-        .pdf-file-size {
-            font-size: 0.85rem;
-            color: #666;
-        }
-        
-        .pdf-file-remove {
-            color: #666;
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 50%;
-            transition: all 0.2s ease;
-        }
-        
-        .pdf-file-remove:hover {
-            background-color: rgba(231, 234, 234, 0.5);
-            color: #e74c3c;
-        }
-        
-        .submit-button-container {
-            position: absolute;
-            bottom: 1rem;
-            right: 1rem;
-        }
-        
-        textarea.form-control {
-            min-height: 100px;
-            font-family: monospace;
-        }
-        
-        .btn-primary {
-            background-color: var(--primary-grey);
-            border-color: var(--primary-blue);
-            padding: 0.5rem 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #333;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-primary:hover {
-            background-color: var(--primary-blue);
-            border-color: var(--primary-blue);
-            color: var(--white);
-        }
-
-        .btn-primary:hover .rocket-icon {
-            transform: translateY(-2px);
-            filter: brightness(0) invert(1);
-        }
-        
-        .btn-add {
-            background-color: var(--secondary-blue);
-            color: #333;
-            border: none;
-            padding: 0.5rem 1rem;
-            margin-top: 0.5rem;
-            font-weight: 500;
-        }
-        
-        .btn-add:hover {
-            background-color: var(--primary-blue);
-            color: var(--white);
-        }
-        
-        .part-number-group, .specification-group {
-            background-color: var(--primary-grey);
-            padding: 1rem;
-            margin-bottom: 1rem;
-            border-radius: 4px;
-            position: relative;
-        }
-        
-        .results-table {
-            margin-top: 2rem;
-            background-color: var(--white);
-            border-radius: 8px;
-            overflow-x: auto;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            width: 100%;
-        }
-        
-        .results-table table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        
-        .results-table th,
-        .results-table td {
-            border: 1px solid #dee2e6;
-            padding: 12px;
-        }
-        
-        .results-table th {
-            background-color: var(--primary-blue);
-            color: var(--white);
-        }
-        
-        .spec-cell[data-status="verified"] {
-            background-color: var(--secondary-blue);
-            cursor: pointer;
-        }
-        
-        .spec-cell[data-status="high-confidence"] {
-            background-color: rgba(160, 217, 216, 0.7);
-            cursor: pointer;
-        }
-        
-        .spec-cell[data-status="medium-confidence"] {
-            background-color: rgba(25, 168, 156, 0.2);
-            cursor: pointer;
-        }
-        
-        .spec-cell[data-status="low-confidence"] {
-            background-color: rgba(25, 168, 156, 0.4);
-            cursor: pointer;
-        }
-        
-        .spec-cell[data-status="not-found"] {
-            background-color: var(--primary-grey);
-        }
-        
-        .spec-cell[data-status="error"] {
-            background-color: rgba(25, 168, 156, 0.6);
-        }
-        
-        .source-tooltip {
-            display: none;
-            position: absolute;
-            background: var(--white);
-            border: 1px solid var(--primary-blue);
-            padding: 1rem;
-            border-radius: 4px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            z-index: 1000;
-            min-width: 200px;
-            max-width: 300px;
-        }
-        
-        .loading {
-            display: none;
-            text-align: left;
-            margin: 2rem 0;
-            position: relative;
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .loading-step {
-            display: flex;
-            align-items: center;
-            margin: 1rem 0;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: all 0.5s ease;
-        }
-
-        .loading-step.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .loading-step .spinner-border {
-            width: 1.2rem;
-            height: 1.2rem;
-            margin-right: 1rem;
-            border-color: rgb(25, 168, 156);
-            border-right-color: transparent !important;
-        }
-
-        .loading-step .loading-step-text {
-            font-size: 1.1rem;
-            color: #333;
-            margin-right: 0.5rem;
-        }
-
-        .loading-step .rocket {
-            width: 1.2rem;
-            height: 1.2rem;
-            display: none;
-            background-image: url('data:image/svg+xml;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAF0WlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNy4yLWMwMDAgNzkuMWI2NWE3OWI0LCAyMDIyLzA2LzEzLTIyOjAxOjAxICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdEV2dD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlRXZlbnQjIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgMjQuMCAoTWFjaW50b3NoKSIgeG1wOkNyZWF0ZURhdGU9IjIwMjQtMDMtMDdUMTM6MDc6NDctMDU6MDAiIHhtcDpNZXRhZGF0YURhdGU9IjIwMjQtMDMtMDdUMTM6MDc6NDctMDU6MDAiIHhtcDpNb2RpZnlEYXRlPSIyMDI0LTAzLTA3VDEzOjA3OjQ3LTA1OjAwIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjA1YzM5ZjE1LTY2ZDgtNDI4NC1hMjY3LTYyZjZhZjY2ZjY2ZiIgeG1wTU06RG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjA1YzM5ZjE1LTY2ZDgtNDI4NC1hMjY3LTYyZjZhZjY2ZjY2ZiIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOjA1YzM5ZjE1LTY2ZDgtNDI4NC1hMjY3LTYyZjZhZjY2ZjY2ZiIgZGM6Zm9ybWF0PSJpbWFnZS9zdmcreG1sIiBwaG90b3Nob3A6Q29sb3JNb2RlPSIzIj4gPHhtcE1NOkhpc3Rvcnk+IDxyZGY6U2VxPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0iY3JlYXRlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDowNWMzOWYxNS02NmQ4LTQyODQtYTI2Ny02MmY2YWY2NmY2NmYiIHN0RXZ0OndoZW49IjIwMjQtMDMtMDdUMTM6MDc6NDctMDU6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCAyNC4wIChNYWNpbnRvc2gpIi8+IDwvcmRmOlNlcT4gPC94bXBNTTpIaXN0b3J5PiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PgH//v38+/r5+Pf29fTz8vHw7+7t7Ovq6ejn5uXk4+Lh4N/e3dzb2tnY19bV1NPS0dDPzs3My8rJyMfGxcTDwsHAv769vLu6ubi3trW0s7KxsK+urayrqqmop6alpKOioaCfnp2cm5qZmJeWlZSTkpGQj46NjIuKiYiHhoWEg4KBgH9+fXx7enl4d3Z1dHNycXBvbm1sa2ppaGdmZWRjYmFgX15dXFtaWVhXVlVUU1JRUE9OTUxLSklIR0ZFRENCQUA/Pj08Ozo5ODc2NTQzMjEwLy4tLCsqKSgnJiUkIyIhIB8eHRwbGhkYFxYVFBMSERAPDg0MCwoJCAcGBQQDAgEAACH5BAEAAAAALAAAAAAyADIAAAj/AAEIHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qNGjSJMqXcq0qdOnUKNKnUq1qtWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9+/gAMLHky4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u/fv4MOLvx9Pvrz58+jTq1/Pvr379/Djy59Pv779+/jz69/Pv7///wAGKOCABBZo4IEIJqjgggw26OCDEEYo4YQUVmjhhRhmqOGGHHbo4YcghijiiCSWaOKJKKao4oostujiizDGKOOMNNZo44045qjjjjz26OOPQAYp5JBEFmnkkUgmqeSSTDbp5JNQRinllFRWaeWVWGap5ZZcdunll2CGKeaYZJZp5plopqnmmmy26eabcMYp55x01mnnnXjmqeeefPbp55+ABirooIQWauihiCaq6KKMNuroo5BGKumklFZq6aWYZqrpppx26umnoIYq6qiklmrqqaimquqqrLbq6quwxpprr7z26uuvwAYr7LDEFmvsscgmq+yyzDbr7LPQRivttNRWa+212Gar7bbcduvtt+CGK+645JZr7rnopqvuuuy26+678MYr77z01mvvvfjmq+++/Pbr778AByzwwAQXbPDBCCes8MIMN+zwwxBHLPHEFFds8cUYZ6zxxhx37PHHIIcs8sgkl2zyySinrPLKLLfs8sswxyzzzDTXbPPNOOes88489+zzz0AHLfTQRBdt9NFIJ6300kw37fTTUEct9dRUV2311VhnrfXWXHft9ddghy322GSXbfbZaKet9tpst+3223DHLffcdNdt991456333nz37fffgAcu+OCEF2744YgnrvjijDfu+OOQRy755JRXbvnlmGeu+eacd+7556CHLvropJdu+umop6766qy37vrrsMcu++y012777bjnrvvuvPfu++/ABy/88MQXb/zxyCev/PLMN+/889BHL/301Fdv/fXYZ6/99tx37/334Icv/vjkl2/++einr/767Lfv/vvwxy///PTXb//9+Oev//789+///wAMoAAHSMACGvCACEygAhfIwAY68IEQjKAEJ0jBClrwghjMoAY3yMEOevCDIAyhCEdIwhKa8IQoTKEKV8jCFrrwhTCMoQxnSMMa2vCGOMyhDnfIwx768IdADKIQh0jEIhrxiEhMohKXyMQmOvGJUIyiFKdIxSpa8YpYzKIWt8jFLnrxi2AMoxjHSMYymvGMaEyjGtfIxja68Y1wjKMc50jHOtrxjnjMox73yMc++vGPgAykIAdJyEIa8pCITKQiF8nIRjrykZCMpCQnSclKWvKSmMykJjfJyU568pOgDKUoR0nKUprylKhMpSpXycpWuvKVsIylLGdJy1ra8pa4zKUud8nLXvryl8AMpjCHScxiGvOYyEymMpfJzGY685nQjKY0p0nNalrzmtjMpja3yc1uevOb4AynOMdJznKa85zoTKc618nOdrrznfCMpzznSc962vOe+MynPvfJz376858ADahAB0rQghr0oAhNqEIXytCGOvShEI2oRCdK0Ypa9KIYzahGN8rRjnr0oyANqUhHStKSmvSkKE2pSlfK0pa69KUwjalMZ0rTmtr0pjjNqU53ytOe+vSnQA2qUIdK1KIa9ahITapSl8rUpjr1qVCNqlSnStWqWvWqWM2qVrfK1a569atgDatYx0rWspr1rGhNq1rXyta2uvWtcI2rXOdK17ra9a54zate98rXvvr1r4ANrGAHS9jCGvawiE2sYhfL2MY69rGQjaxkJ0vZylr2spjNrGY3y9nOevazoA2taEdL2tKa9rSoTa1qV8va1rr2tbCNrWxnS9va2va2uM2tbnfL29769rfADa5wh0vc4hr3uMhNrnKXy9zmOve50I2udKdL3epa97rYza52t8vd7nr3u+ANr3jHS97ymve86E2vetfL3va6973wja9850vf+tr3vvjNr373y9/++ve/AA6wgAdM4AIb+MAITrCCF8zgBjv4wRCOsIQnTOEKW/jCGM6whjfM4Q57+MMgDrGIR0ziEpv4xChOsYpXzOIWu/jFMI6xjGdM4xrb+MY4zrGOd8zjHvv4x0AOspCHTOQiG/nISE6ykpfM5CY7+clQjrKUp0zlKlv5yljOspa3zOUue/nLYA6zmMdM5jKb+cxoTrOa18zmNrv5zXCOs5znTOc62/nOeM6znvfM5z77+c+ADrSgB03oQhv60IhOtKIXzehGO/rRkI60pCdN6Upb+tKYzrSmN83pTnv606AOtahHTepSm/rUqE61qlfN6la7+tWwjrWsZ03rWtv61rjOta53zete+/rXwA62sIdN7GIb+9jITrayl83sZjv72dCOtrSnTe1qW/va2M62trfN7W57+9vgDre4x03ucpv73OhOt7rXze52u/vd8I63vOdN73rb+974zre+983vfvv73wAPuMAHTvCCG/zgCE+4whfO8IY7/OEQj7jEJ07xilv84hjPuMY3zvGOe/zjIA+5yEdO8pKb/OQoT7nKV87ylrv85TCPucxnTvOa2/zmOM+5znfO8577/OdAD7rQh070ohv96EhPutKXzvSmO/3pUI+61KdO9apb/epYz7rWt871rnv962APu9jHTvaym/3saE+72tfO9ra7/e1wj7vc5073utv97njPu973zve++/3vgA+84AdP+MIb/vCIT7ziF8/4xjv+8ZCPvOQnT/nKW/7ymM+85jfP+c57/vOgD73oR0/60pv+9KhPvepXz/rWu/71sI+97GdP+9rb/va4z73ud8/73vv+98APvvCHT/ziG//4yE++8pfP/OY7//nQj770p0/96lv/+tjPvva3z/3ue//74A+/+MdP/vKb//zoT7/6189+97v//fCPv/znT//62//++M+//vfP//77//8AGIACOIAEWIAGeIAImIAKuIAM2IAO+IAQGIESOIEUWIEWeIEYmIEauIEc2IEe+IEgGIIiOIIkWIImeIIomIIquIIs2IIu+IIwGIMyOIM0WIM2eIM4mIM6uIM82IM++INAGIRCOIREWIRGeIRImIRKuIRM2IRO+IRQGIVSOIVUWIVWeIVYmIVauIVc2IVe+IVgGIZiOIZkWIZmeIZomIZquZZs2ZZu+ZZwGZdyOZd0WZd2eZd4mZd6uZd82Zd++ZeAGZiCOZiEWZiGeZiImZiKuZiM2ZiO+ZiQGZmSOZmUWZmWeZmYmZmauZmc2Zme+ZmgGZqiOZqkWZqmeZqomZqquZqs2Zqu+ZqwGZuyOZu0WZu2eZu4mZu6uZu82Zu++ZvAGZzCOZzEWZzGeZzImZzKuZzM2ZzO+ZzQGZ3SOZ3UWZ3WeZ3YmZ3auZ3c2Z3e+Z3gGZ7iOZ7kWZ7meZ7omZ7quZ7s2Z7u+Z7wGZ/yOZ/0WZ/2eZ/4mZ/6uZ/82Z/++Z8AGqACOqAEWqAGeqAImqAKuqAM2qAO+qAQGqESOqEUWqEWeqEYmqEauqEc2qEe+qEgGqIiOqIkWqImeqIomqIquqIs2qIu+qIwGqMyOqM0WqM2eqM4mqM6uqM82qM++qNAGqRCOqREWqRGeqRImqRKuqRM2qRO+qRQGqVSOqVUWqVWeqVYmqVauqVc2qVe+qVgGqZiOqZkWqZmeqZomqZquqZs2qZu+qZwGqdyOqd0Wqd2eqd4mqd6uqd82qd++qeAGqiCOqiEWqiGeqiImqiKuqiM2qiO+qiQGqmSOqmUWqmWeqmYmqmauqmc2qme+qmgGqqiOqqkWqqmeqqomqqquqqs2qqu+qqwGquyOqu0Wqu2equ4mqu6uqu82qu++qvAGqzCOqzEWqzGeqzImqzKuqzM2qzO+qzQGq3SOq3UWq3Weq3Ymq3auq3c2q3e+q3gGq7iOq7kWq7meq7omq7quq7s2q7u+q7wGq/yOq/0Wq/2eq/4mq/6uq/82q/++q8AG7ACO7AEW7AGe7AImwEBAQA7');
-            background-size: contain;
-            background-repeat: no-repeat;
             transform: scale(1.2);
         }
 
@@ -512,8 +233,11 @@
                 </div>
 
                 <div class="submit-button-container">
-                    <button type="submit" class="btn btn-primary">
-                        Search
+                    <button type="button" id="pdfAnalysisBtn" class="btn btn-primary me-2">
+                        Analyze PDF
+                    </button>
+                    <button type="button" id="webSearchBtn" class="btn btn-primary">
+                        Search Web
                     </button>
                 </div>
             </form>
@@ -629,16 +353,43 @@
             };
         }
 
-        // Form submission
-        document.getElementById('specForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            console.log('Form submitted');
+        // Separate results containers for PDF and Web results
+        function createResultsContainer(id, title) {
+            return `
+                <div id="${id}" class="results-table" style="display: none; margin-bottom: 3rem;">
+                    <h3>${title}</h3>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr id="${id}_headerRow">
+                                <th>Part Number</th>
+                            </tr>
+                        </thead>
+                        <tbody id="${id}_resultsBody"></tbody>
+                    </table>
+                </div>
+            `;
+        }
+        
+        // Add results containers after the loading section
+        document.querySelector('.loading').insertAdjacentHTML('afterend', 
+            createResultsContainer('pdfResultsContainer', 'PDF Results') + 
+            createResultsContainer('webResultsContainer', 'Web Results')
+        );
+        
+        // Web search button
+        document.getElementById('webSearchBtn').addEventListener('click', async (e) => {
+            console.log('Web search button clicked');
             
             const loading = document.querySelector('.loading');
-            const resultsContainer = document.getElementById('resultsContainer');
+            const resultsContainer = document.getElementById('webResultsContainer');
             const supplier = document.getElementById('supplier').value;
             const partNumbers = parseInput(document.getElementById('partNumbers').value);
             const specifications = parseInput(document.getElementById('specifications').value);
+            
+            if (!supplier || partNumbers.length === 0 || specifications.length === 0) {
+                alert('Please fill in all required fields');
+                return;
+            }
             
             console.log('Form data:', {
                 supplier,
@@ -647,7 +398,6 @@
             });
             
             loading.style.display = 'block';
-            resultsContainer.style.display = 'none';
             
             // Start the loading animation
             const loadingAnimation = animateLoadingSteps();
@@ -670,7 +420,7 @@
                     },
                     body: JSON.stringify({
                         supplier: supplier,
-                        part_numbers: partNumbers, // Send all part numbers
+                        part_numbers: partNumbers,
                         specifications: specifications
                     })
                 });
@@ -700,22 +450,118 @@
                 loadingAnimation.completeStep();
                 await new Promise(resolve => setTimeout(resolve, 1500));
                 
-                displayResults(result);
+                displayResults(result, 'webResultsContainer');
             } catch (error) {
-                console.error('Error during form submission:', error);
+                console.error('Error during web search:', error);
+                alert('Error: ' + error.message);
+            } finally {
+                loading.style.display = 'none';
+            }
+        });
+        
+        // PDF analysis button
+        document.getElementById('pdfAnalysisBtn').addEventListener('click', async (e) => {
+            console.log('PDF analysis button clicked');
+            
+            const loading = document.querySelector('.loading');
+            const resultsContainer = document.getElementById('pdfResultsContainer');
+            const supplier = document.getElementById('supplier').value;
+            const partNumbers = parseInput(document.getElementById('partNumbers').value);
+            const specifications = parseInput(document.getElementById('specifications').value);
+            const pdfInput = document.getElementById('pdfInput');
+            
+            if (!supplier || partNumbers.length === 0 || specifications.length === 0) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            if (!pdfInput.files || pdfInput.files.length === 0) {
+                alert('Please upload a PDF file');
+                return;
+            }
+            
+            const pdfFile = pdfInput.files[0];
+            if (!pdfFile.name.endsWith('.pdf')) {
+                alert('Please upload a PDF file');
+                return;
+            }
+            
+            console.log('Form data:', {
+                supplier,
+                partNumbers,
+                specifications,
+                pdfFile: pdfFile.name
+            });
+            
+            loading.style.display = 'block';
+            
+            // Start the loading animation
+            const loadingAnimation = animateLoadingSteps();
+            
+            try {
+                // Complete first step (Building product expertise)
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                loadingAnimation.completeStep();
+                
+                console.log('Sending PDF to server...');
+                
+                // Complete second step (Understanding specification context)
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                loadingAnimation.completeStep();
+                
+                // Create form data with file
+                const formData = new FormData();
+                formData.append('pdf_file', pdfFile);
+                formData.append('supplier', supplier);
+                formData.append('part_numbers', JSON.stringify(partNumbers));
+                formData.append('specifications', JSON.stringify(specifications));
+                
+                const response = await fetch('/process_pdf', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                console.log('Response status:', response.status);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                // Complete third step (Gathering specification values)
+                loadingAnimation.completeStep();
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                const result = await response.json();
+                console.log('API Response:', JSON.stringify(result, null, 2));
+                
+                if (result.error) {
+                    throw new Error(result.error);
+                }
+                
+                // Complete fourth step (Assessing confidence levels)
+                loadingAnimation.completeStep();
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // Complete final step (Preparing results)
+                loadingAnimation.completeStep();
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                displayResults(result, 'pdfResultsContainer');
+            } catch (error) {
+                console.error('Error during PDF analysis:', error);
                 alert('Error: ' + error.message);
             } finally {
                 loading.style.display = 'none';
             }
         });
 
-        function displayResults(data) {
-            console.log('Starting to display results...');
+        function displayResults(data, containerId) {
+            console.log(`Starting to display results in ${containerId}...`);
             console.log('Received data:', data);
             
-            const headerRow = document.getElementById('headerRow');
-            const resultsBody = document.getElementById('resultsBody');
-            const resultsContainer = document.getElementById('resultsContainer');
+            const headerRow = document.getElementById(`${containerId}_headerRow`);
+            const resultsBody = document.getElementById(`${containerId}_resultsBody`);
+            const resultsContainer = document.getElementById(containerId);
 
             // Clear existing content
             headerRow.innerHTML = '';

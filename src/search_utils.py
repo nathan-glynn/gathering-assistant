@@ -9,7 +9,6 @@ import aiohttp
 import ssl
 import certifi
 import requests
-import requests.exceptions
 from concurrent.futures import ThreadPoolExecutor
 
 # Debugging feature
@@ -71,19 +70,19 @@ Please be thorough but concise in your response. Only provide information for th
             }
 
             logger.info("Making API request to Perplexity")
-            try:
-                response = await asyncio.to_thread(
-                    requests.post,
-                    PERPLEXITY_API_URL,
-                    headers=headers,
-                    json=payload,
-                    timeout=30
-                )
+            response = await asyncio.to_thread(
+                requests.post,
+                PERPLEXITY_API_URL,
+                headers=headers,
+                json=payload,
+                timeout=30
+            )
+            
             except requests.exceptions.Timeout:
                 logger.error(f"Timeout occurred for part {part_number}")
                 return None
             except Exception as api_error:
-                logger.error(f"Perplexity API error during post: {str(api_error)}")
+                logger.error(f"Perplexity API error: {str(api_error)}")
                 return None
 
             if response.status_code != 200:
@@ -107,9 +106,9 @@ Please be thorough but concise in your response. Only provide information for th
 
             return result['choices'][0]['message']['content']
 
-        except Exception as e:
-            logger.error(f"API call wrapper error: {str(e)}")
-            return None
+        except Exception as api_error:
+            logger.error(f"Perplexity API error: {str(api_error)}")
+            raise
     except Exception as e:
         logger.error(f"Error in get_specification_async: {str(e)}")
         return None
@@ -228,7 +227,7 @@ async def search_specification(supplier: str, part_numbers: List[str], specifica
                 continue
 
             log_stage(f"received_responses:{part_number}")
-            responses = [r for r in responses if r is not None and isinstance(r, str)]
+            responses = [r for r in responses if r is not None]
 
             if not responses:
                 logger.warning(f"No valid responses received from Perplexity for part number {part_number}")
@@ -269,4 +268,3 @@ async def search_specification(supplier: str, part_numbers: List[str], specifica
     except Exception as e:
         logger.error(f"Error in search_specification: {str(e)}")
         return {"error": str(e)}
-
