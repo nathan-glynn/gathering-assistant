@@ -311,20 +311,30 @@ def process_pdf_with_mistral(pdf_bytes, supplier, part_numbers, specifications):
     with open(temp_path, "wb") as f:
         f.write(pdf_bytes)
 
+    # Step 1: Upload the PDF to Mistral
     with open(temp_path, "rb") as f:
-        ocr_response = client.ocr.process(
-            model="mistral-ocr-latest",
-            document={
-                "type": "document_file",
-                "document_file": f
+        uploaded_pdf = client.files.upload(
+            file={
+                "file_name": "uploaded_file.pdf",
+                "content": f,
             },
-            include_image_base64=False
+            purpose="ocr"
         )
+
+    # Step 2: Get a signed URL for the uploaded file
+    signed_url = client.files.get_signed_url(file_id=uploaded_pdf.id)
+
+    # Step 3: Call the OCR endpoint with the signed URL
+    ocr_response = client.ocr.process(
+        model="mistral-ocr-latest",
+        document={
+            "type": "document_url",
+            "document_url": signed_url.url,
+        }
+    )
 
     os.remove(temp_path)
 
     # Extract text from OCR response (adjust as needed)
     extracted_text = ocr_response.get("text", "")
-    # You can now parse extracted_text for your specifications
-    # For now, just return the raw OCR response
     return {"ocr_text": extracted_text, "ocr_response": ocr_response} 
