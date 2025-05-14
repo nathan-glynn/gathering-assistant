@@ -302,16 +302,35 @@ def get_validation_status(confidence: float) -> str:
     else:
         return "grey"
 
+def parse_ocr_for_specifications(ocr_response, part_numbers, specifications):
+    # Combine all markdown text from all pages
+    all_text = "\n".join(page.markdown for page in getattr(ocr_response, 'pages', []))
+    results = []
+    for part_number in part_numbers:
+        part_result = {"part_number": part_number, "specifications": []}
+        for spec in specifications:
+            # Simple regex: look for the spec name and grab the value after it (up to a newline or punctuation)
+            pattern = rf"{re.escape(spec)}[\s:]*([\w\d\"'\.\-\(\)\/]+)"
+            match = re.search(pattern, all_text, re.IGNORECASE)
+            value = match.group(1) if match else "Not found"
+            confidence = "medium" if match else "low"
+            part_result["specifications"].append({
+                "name": spec,
+                "value": value,
+                "confidence": confidence,
+                "source": "OCR"
+            })
+        results.append(part_result)
+    return {"results": results}
+
 def process_pdf_with_mistral(pdf_bytes, supplier, part_numbers, specifications):
     api_key = os.environ["MISTRAL_API_KEY"]
     client = Mistral(api_key=api_key)
 
-    # Save the PDF temporarily
     temp_path = "temp_upload.pdf"
     with open(temp_path, "wb") as f:
         f.write(pdf_bytes)
 
-    # Step 1: Upload the PDF to Mistral
     with open(temp_path, "rb") as f:
         uploaded_pdf = client.files.upload(
             file={
@@ -320,11 +339,7 @@ def process_pdf_with_mistral(pdf_bytes, supplier, part_numbers, specifications):
             },
             purpose="ocr"
         )
-
-    # Step 2: Get a signed URL for the uploaded file
     signed_url = client.files.get_signed_url(file_id=uploaded_pdf.id)
-
-    # Step 3: Call the OCR endpoint with the signed URL
     ocr_response = client.ocr.process(
         model="mistral-ocr-latest",
         document={
@@ -332,14 +347,10 @@ def process_pdf_with_mistral(pdf_bytes, supplier, part_numbers, specifications):
             "document_url": signed_url.url,
         }
     )
-
     os.remove(temp_path)
 
-    # Extract text from OCR response (adjust as needed)
-    extracted_text = getattr(ocr_response, "text", "")
-    # Return a serializable version of the OCR response
-    if hasattr(ocr_response, 'model_dump'):
-        ocr_response_dict = ocr_response.model_dump()
-    else:
-        ocr_response_dict = str(ocr_response)
-    return {"ocr_text": extracted_text, "ocr_response": ocr_response_dict} 
+    # Parse OCR for structured results
+    parsed = parse_ocr_for_specifications(ocr_response, part_numbers, specifications)
+    # Optionally, include raw OCR for debugging
+    parsed["ocr_debug"] = getattr(ocr_response, 'pages', [])
+    return parsed 
