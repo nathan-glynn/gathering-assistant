@@ -15,5 +15,5 @@ tenacity==8.2.3
 asyncio>=3.4.3
 certifi>=2024.2.2
 uvicorn==0.29.0
-openai==1.15.0
+openai==1.14.0
 psutil
