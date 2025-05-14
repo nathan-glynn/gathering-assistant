@@ -77,38 +77,34 @@ Please be thorough but concise in your response. Only provide information for th
                 json=payload,
                 timeout=30
             )
-            
-            except requests.exceptions.Timeout:
-                logger.error(f"Timeout occurred for part {part_number}")
-                return None
-            except Exception as api_error:
-                logger.error(f"Perplexity API error: {str(api_error)}")
-                return None
-
-            if response.status_code != 200:
-                logger.error(f"Perplexity API error: Status {response.status_code}, Response: {response.text}")
-                logger.error(f"Request headers: {headers}")
-                raise Exception(f"API request failed with status {response.status_code}: {response.text}")
-
-            result = response.json()
-            logger.info(f"Perplexity API raw response: {json.dumps(result, indent=2)}")
-            logger.info("Perplexity API call successful")
-
-            if 'choices' not in result or not result['choices']:
-                logger.error("No choices in response")
-                return None
-            if 'message' not in result['choices'][0]:
-                logger.error("No message in first choice")
-                return None
-            if 'content' not in result['choices'][0]['message']:
-                logger.error("No content in message")
-                return None
-
-            return result['choices'][0]['message']['content']
-
+        except requests.exceptions.Timeout:
+            logger.error(f"Timeout occurred for part {part_number}")
+            return None
         except Exception as api_error:
             logger.error(f"Perplexity API error: {str(api_error)}")
-            raise
+            return None
+
+        if response.status_code != 200:
+            logger.error(f"Perplexity API error: Status {response.status_code}, Response: {response.text}")
+            logger.error(f"Request headers: {headers}")
+            raise Exception(f"API request failed with status {response.status_code}: {response.text}")
+
+        result = response.json()
+        logger.info(f"Perplexity API raw response: {json.dumps(result, indent=2)}")
+        logger.info("Perplexity API call successful")
+
+        if 'choices' not in result or not result['choices']:
+            logger.error("No choices in response")
+            return None
+        if 'message' not in result['choices'][0]:
+            logger.error("No message in first choice")
+            return None
+        if 'content' not in result['choices'][0]['message']:
+            logger.error("No content in message")
+            return None
+
+        return result['choices'][0]['message']['content']
+
     except Exception as e:
         logger.error(f"Error in get_specification_async: {str(e)}")
         return None
