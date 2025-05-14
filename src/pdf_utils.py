@@ -8,6 +8,7 @@ import json
 import asyncio
 import base64
 import requests
+from functools import lru_cache
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
