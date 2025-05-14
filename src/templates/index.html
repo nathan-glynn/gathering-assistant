@@ -197,6 +197,64 @@
         .confidence-cell:hover .tooltip-content {
             display: block;
         }
+
+        // PDF file upload handling
+        .pdf-dropzone {
+            border: 2px dashed #ccc;
+            border-radius: 4px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: #f8f9fa;
+        }
+
+        .pdf-dropzone:hover, .pdf-dropzone.dragover {
+            border-color: var(--primary-blue);
+            background-color: #e9ecef;
+        }
+
+        .pdf-dropzone-icon {
+            font-size: 2rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .pdf-dropzone-text {
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .pdf-dropzone-subtext {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .pdf-preview {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+
+        .pdf-preview i {
+            color: #dc3545;
+            margin-right: 10px;
+        }
+
+        .pdf-preview span {
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+
+        .remove-pdf {
+            padding: 0 8px;
+            font-size: 1.2rem;
+            line-height: 1;
+        }
     </style>
 </head>
 <body>
@@ -664,86 +722,69 @@
             });
         }
 
-        // Add this to your existing JavaScript
-        const dropzone = document.getElementById('pdfDropzone');
+        // PDF file upload handling
+        const pdfDropzone = document.getElementById('pdfDropzone');
         const pdfInput = document.getElementById('pdfInput');
-        const previewContainer = document.getElementById('pdfPreviewContainer');
-        
-        // Prevent default drag behaviors
-        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-            dropzone.addEventListener(eventName, preventDefaults, false);
-            document.body.addEventListener(eventName, preventDefaults, false);
+        const pdfPreviewContainer = document.getElementById('pdfPreviewContainer');
+
+        // Handle click to browse
+        pdfDropzone.addEventListener('click', () => {
+            pdfInput.click();
         });
-        
-        function preventDefaults (e) {
+
+        // Handle file selection
+        pdfInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                handlePdfFile(file);
+            }
+        });
+
+        // Handle drag and drop
+        pdfDropzone.addEventListener('dragover', (e) => {
             e.preventDefault();
-            e.stopPropagation();
-        }
-        
-        // Highlight drop zone when dragging over it
-        ['dragenter', 'dragover'].forEach(eventName => {
-            dropzone.addEventListener(eventName, highlight, false);
+            pdfDropzone.classList.add('dragover');
         });
-        
-        ['dragleave', 'drop'].forEach(eventName => {
-            dropzone.addEventListener(eventName, unhighlight, false);
+
+        pdfDropzone.addEventListener('dragleave', () => {
+            pdfDropzone.classList.remove('dragover');
         });
-        
-        function highlight(e) {
-            dropzone.classList.add('dragover');
-        }
-        
-        function unhighlight(e) {
-            dropzone.classList.remove('dragover');
-        }
-        
-        // Handle dropped files
-        dropzone.addEventListener('drop', handleDrop, false);
-        
-        function handleDrop(e) {
-            const dt = e.dataTransfer;
-            const files = dt.files;
-            handleFiles(files);
-        }
-        
-        // Handle selected files
-        dropzone.addEventListener('click', () => pdfInput.click());
-        pdfInput.addEventListener('change', function() {
-            handleFiles(this.files);
-        });
-        
-        function handleFiles(files) {
-            ([...files]).forEach(file => {
-                if (file.type === 'application/pdf') {
-                    displayFile(file);
-                }
-            });
-        }
-        
-        function displayFile(file) {
-            previewContainer.innerHTML = '';
-            const preview = document.createElement('div');
-            preview.className = 'pdf-file-preview';
+
+        pdfDropzone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            pdfDropzone.classList.remove('dragover');
             
-            const fileSize = (file.size / 1024 / 1024).toFixed(2);
-            
-            preview.innerHTML = `
-                <i class="fas fa-file-pdf pdf-file-icon"></i>
-                <div class="pdf-file-info">
-                    <div class="pdf-file-name">${file.name}</div>
-                    <div class="pdf-file-size">${fileSize} MB</div>
-                </div>
-                <div class="pdf-file-remove">
-                    <i class="fas fa-times"></i>
+            const file = e.dataTransfer.files[0];
+            if (file) {
+                handlePdfFile(file);
+            }
+        });
+
+        function handlePdfFile(file) {
+            if (!file.name.endsWith('.pdf')) {
+                alert('Please upload a PDF file');
+                return;
+            }
+
+            // Update the file input
+            const dataTransfer = new DataTransfer();
+            dataTransfer.items.add(file);
+            pdfInput.files = dataTransfer.files;
+
+            // Show preview
+            pdfPreviewContainer.innerHTML = `
+                <div class="pdf-preview">
+                    <i class="fas fa-file-pdf"></i>
+                    <span>${file.name}</span>
+                    <button type="button" class="btn btn-sm btn-danger remove-pdf">×</button>
                 </div>
             `;
-            
-            preview.querySelector('.pdf-file-remove').addEventListener('click', () => {
-                preview.remove();
+
+            // Add remove button functionality
+            pdfPreviewContainer.querySelector('.remove-pdf').addEventListener('click', () => {
                 pdfInput.value = '';
+                pdfPreviewContainer.innerHTML = '';
             });
-            
-            previewContainer.appendChild(preview);
         }
     </script>
 </body>
