@@ -321,6 +321,47 @@ def parse_ocr_for_specifications(ocr_response, part_numbers, specifications):
         results.append(part_result)
     return {"results": results}
 
+def extract_specs_with_llm(ocr_text, part_numbers, specifications, api_key):
+    client = Mistral(api_key=api_key)
+    # Build the prompt
+    prompt = (
+        "Extract the following specifications for each part number from the provided text.\n"
+        f"Part Numbers: {part_numbers}\n"
+        f"Specifications: {specifications}\n"
+        "Text:\n"
+        f"{ocr_text}\n"
+        "Respond in JSON with this format:\n"
+        """
+        [
+          {
+            "part_number": "...",
+            "specifications": [
+              {"name": "...", "value": "..."},
+              ...
+            ]
+          },
+          ...
+        ]
+        """
+    )
+    # Call Mistral's chat/completion endpoint
+    response = client.chat(
+        model="mistral-large-latest",
+        messages=[{"role": "user", "content": prompt}]
+    )
+    # Extract JSON from the response
+    content = response.choices[0].message.content
+    # Find the first JSON block in the response
+    match = re.search(r'\[.*\]', content, re.DOTALL)
+    if match:
+        try:
+            results = json.loads(match.group(0))
+            return {"results": results}
+        except Exception:
+            pass
+    # Fallback: return empty results
+    return {"results": []}
+
 def process_pdf_with_mistral(pdf_bytes, supplier, part_numbers, specifications):
     api_key = os.environ["MISTRAL_API_KEY"]
     client = Mistral(api_key=api_key)
@@ -347,9 +388,11 @@ def process_pdf_with_mistral(pdf_bytes, supplier, part_numbers, specifications):
     )
     os.remove(temp_path)
 
-    # Parse OCR for structured results
-    parsed = parse_ocr_for_specifications(ocr_response, part_numbers, specifications)
-    # Make ocr_debug serializable
+    # Combine all markdown text from all pages
+    all_text = "\n".join(page["markdown"] if isinstance(page, dict) else page.markdown for page in getattr(ocr_response, 'pages', []))
+    # Use LLM to extract specs
+    parsed = extract_specs_with_llm(all_text, part_numbers, specifications, api_key)
+    # Optionally, include raw OCR for debugging
     pages = getattr(ocr_response, 'pages', [])
     parsed["ocr_debug"] = [p.model_dump() if hasattr(p, 'model_dump') else str(p) for p in pages]
     return parsed 
